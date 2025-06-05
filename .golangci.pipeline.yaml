@@ -31,7 +31,6 @@ linters:
     - revive
     - typecheck
     - unused
-    - shadow  # добавили отдельно
 
 issues:
   exclude-use-default: false
