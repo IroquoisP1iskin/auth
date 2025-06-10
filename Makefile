@@ -25,3 +25,8 @@ generate-user-api:
 	--go-grpc_out=pkg/user_v1 --go-grpc_opt=paths=source_relative \
 	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
 	api/user_v1/user.proto
+
+docker-build-and-push:
+	docker build --no-cache -t cr.selcloud.ru/solidsnake/user-service:latest .
+	docker login -u token -p CRgAAAAA48PG6Lll3uQ2itI7pOpm39lVFWu5MbH9 cr.selcloud.ru/solidsnake
+	docker push cr.selcloud.ru/solidsnake/user-service:latest
