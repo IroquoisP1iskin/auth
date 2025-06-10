@@ -1,14 +1,16 @@
 FROM golang:1.23-alpine AS builder
 
-COPY . /github.com/IroquoisP1iskin/auth/source
-WORKDIR /github.com/IroquoisP1iskin/auth/source
+COPY . /app
+WORKDIR /app
 
 RUN go mod download
-RUN go build -o /source/bin/auth-service cmd/main.go
+RUN go build -o auth-service cmd/main.go
 
 FROM alpine:latest
 
-WORKDIR /root/
-COPY --from=builder /github.com/IroquoisP1iskin/auth/source/bin/auth-service .
+WORKDIR /app
+COPY --from=builder /app/auth-service .
 
-CMD ["./auth-service"]
+EXPOSE 50051
+
+CMD ["/app/auth-service"]
